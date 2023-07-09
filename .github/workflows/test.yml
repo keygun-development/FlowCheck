@@ -1,0 +1,17 @@
+name: Run Tests and Linter
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run tests
+        run: composer run test
+
+      - name: Run linter
+        run: npm run lint
