@@ -1,4 +1,4 @@
-name: Install Dependencies
+name: Install Dependencies & Run Code Checkers
 
 on:
   pull_request:
@@ -28,3 +28,9 @@ jobs:
 
       - name: Install npm dependencies
         run: npm ci
+
+      - name: Run tests
+        run: composer run test
+
+      - name: Run linter
+        run: npm run lint
