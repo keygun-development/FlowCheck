@@ -1,5 +1,5 @@
-name: flowcheck
-description: Install dependencies, run code checkers & run linter. Integrate this in your Laravel, PHP and Javascript projects to have consistent and working code!
+name: flowcheck install dependencies & run code checkers
+description: Install dependencies, run code checkers & run linter on creating and updating a Pull request.
 branding:
   icon: 'check-circle'
   color: 'green'
