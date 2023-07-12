@@ -1,4 +1,4 @@
-name: Install Dependencies & Run Code Checkers
+name: Flowcheck install dependencies & run code checkers
 
 on:
   pull_request:
