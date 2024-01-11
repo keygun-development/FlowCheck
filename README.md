@@ -1,62 +1,39 @@
-# FlowCheck
+# FlowCheck GitHub Action
 
-FlowCheck is an open-source repository that automates the installation of packages and performs testing using ESLint and PHP_CodeSniffer when creating a Pull Request. This repository streamlines the workflow by integrating package management and code quality checks.
+![FlowCheck Icon](Logo.png)
 
-## Features
+This GitHub Action checks and verifies your project by installing dependencies, running tests, and executing a linter. It is designed to be used in your Continuous Integration (CI) workflow, particularly for PHP and Node.js projects.
 
-- Automated installation of npm packages and composer packages
-- Testing JavaScript code with ESLint
-- Testing PHP code with PHP_CodeSniffer
-- Easy integration into your existing project workflows
+## Inputs
 
-## Prerequisites
+- **enableTests** (optional): Enable or disable running tests. Default is `true`.
+- **enableLinter** (optional): Enable or disable running the linter. Default is `true`.
+- **testCommand** (optional): Command to run tests. Default is `composer run test`.
+- **lintCommand** (optional): Command to run the linter. Default is `npm run lint`.
 
-Before getting started, ensure that you have the following prerequisites installed:
+## Example Usage
 
-- Node.js (for npm package installation)
-- PHP (for composer package installation and PHP_CodeSniffer)
+Create a workflow file (e.g., `.github/workflows/ci.yml`) in your project repository:
 
-## Installation
+```yaml
+name: Run Tests and Linter
 
-1. Clone this repository to your local machine:
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
 
-   ```shell
-   git clone https://github.com/your-username/FlowCheck.git
-   ```
-2. Change into the repository directory:
-    ```shell
-    cd FlowCheck
-    ```
-3. Install npm packages:
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    ```shell
-    npm install
-    ```
-4. Install composer packages:
-
-    ```shell
-    composer install
-    ```
-## Usage
-1. Change the folders
-   
-   Change the commands in the `composer.json` and `package.json` to check the folders you want to be checked.
-   For more information check: [ESLint Documentation](https://eslint.org/docs/latest/use/getting-started) & [PHPCS Documentation](https://github.com/slevomat/coding-standard)
-2. Change the rules
-   By default it uses the `ruleset.xml` and `.eslintrc.js` to set the rules for checking code standards. You may modify this to your own desire.
-3. Run ESLint to perform JavaScript code linting:
-
-    ```shell
-    npm run lint
-    ```
-    This command will analyze your JavaScript files and report any linting errors or warnings.
-
-3. Run PHP_CodeSniffer to check PHP code standards:
-
-    ```shell
-    composer run test
-    ```
-    This command will examine your PHP files according to predefined coding standards and display any violations found.
-
-## Contributing
-Contributions to FlowCheck are welcome! If you encounter any issues, have suggestions, or would like to contribute enhancements, please submit a pull request.
+    steps:
+      - name: Flowcheck
+        uses: keygun-development/FlowCheck@v3.0.0
+        with:
+          enableTests: true
+          enableLinter: true
+          testCommand: 'composer run custom-test-command'
+          lintCommand: 'npm run custom-lint-command'
+```

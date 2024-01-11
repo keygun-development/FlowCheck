@@ -4,6 +4,23 @@ branding:
   icon: 'check-circle'
   color: 'green'
 
+inputs:
+  enableTests:
+    description: 'Enable or disable running tests'
+    default: true
+
+  enableLinter:
+    description: 'Enable or disable running the linter'
+    default: true
+
+  testCommand:
+    description: 'Command to run tests'
+    default: 'composer run test'
+
+  lintCommand:
+    description: 'Command to run linter'
+    default: 'npm run lint'
+
 runs:
   using: "composite"
   steps:
@@ -29,9 +46,19 @@ runs:
       shell: bash
 
     - name: Run tests
-      run: composer run test
+      run: |
+        if [ ${{ inputs.enableTests }} == true ]; then
+          ${GITHUB_WORKSPACE}/${{ inputs.testCommand }}
+        else
+          echo "Tests are disabled."
+        fi
       shell: bash
 
     - name: Run linter
-      run: npm run lint
+      run: |
+        if [ ${{ inputs.enableLinter }} == true ]; then
+          ${GITHUB_WORKSPACE}/${{ inputs.lintCommand }}
+        else
+          echo "Linter is disabled."
+        fi
       shell: bash
