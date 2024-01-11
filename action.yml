@@ -48,7 +48,7 @@ runs:
     - name: Run tests
       run: |
         if [ ${{ inputs.enableTests }} == true ]; then
-          ${GITHUB_WORKSPACE}/${{ inputs.testCommand }}
+          ${{ inputs.testCommand }}
         else
           echo "Tests are disabled."
         fi
@@ -57,7 +57,7 @@ runs:
     - name: Run linter
       run: |
         if [ ${{ inputs.enableLinter }} == true ]; then
-          ${GITHUB_WORKSPACE}/${{ inputs.lintCommand }}
+          ${{ inputs.lintCommand }}
         else
           echo "Linter is disabled."
         fi
