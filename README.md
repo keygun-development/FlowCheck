@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Flowcheck
-        uses: keygun-development/FlowCheck@v3.0.0
+        uses: keygun-development/FlowCheck@v3.0.1
         with:
           enableTests: true
           enableLinter: true
